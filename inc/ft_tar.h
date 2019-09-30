@@ -6,7 +6,7 @@
 /*   By: smaddox <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/28 06:43:15 by smaddox           #+#    #+#             */
-/*   Updated: 2019/09/28 15:26:10 by smaddox          ###   ########.fr       */
+/*   Updated: 2019/09/29 18:19:51 by smaddox          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -17,6 +17,10 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <string.h>
+#include <pwd.h>
+#include <grp.h>
+#include <uuid/uuid.h>
+#include <sys/types.h>
 typedef struct		s_header_block
 {									
 									/*	OFFSETS	*/
@@ -27,7 +31,7 @@ typedef struct		s_header_block
 	char			size[12];		/*	124		*/
 	char			mtime[12];		/*	136		*/
 	char			chksum[8];		/*	148 	*/
-	char			typeflag;		/*	156		*/
+	char			typeflag[1];	/*	156		*/
 	char			linkname[100];	/*	157 	*/
 	char			magic[6];		/*	257		*/
 	char			version[2];		/*	263 	*/
@@ -65,6 +69,9 @@ typedef	struct		s_write_block
 
 
 void push_block(union u_raw_block new_block);
+void write_blocks(int fd);
 void print_blocks(void);
 
-
+void handle_file(char *file_name);
+void get_header_info(char *file_name);
+void get_file_data(char *file_name);

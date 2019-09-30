@@ -6,7 +6,7 @@
 /*   By: smaddox <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 16:22:08 by smaddox           #+#    #+#             */
-/*   Updated: 2019/07/21 18:31:45 by smaddox          ###   ########.fr       */
+/*   Updated: 2019/09/29 16:03:20 by smaddox          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define BASE_DIGITS "0123456789abcdef"
 # define DEFAULT_TRASH_SIZE 100
-# define TABLE_LEN 11
+# define TABLE_LEN 12
 # define NUM_H_FLAGS 5
 # define NUM_L_FLAGS 3
 # define H_FLAGS " #0-+"
@@ -34,7 +34,8 @@
 # define XX { 'X', &xx }
 # define F { 'f', &f }
 # define PC { '%', &percent }
-# define FUNCS { S, C, P, D, I, O, U, X, XX, F, PC}
+# define V { 'v', &v } //new addition
+# define FUNCS { V, S, C, P, D, I, O, U, X, XX, F, PC}
 # define INIT_TABLE(x) t_dispatch_table x = { FUNCS }
 
 typedef struct					s_string
@@ -115,4 +116,5 @@ void							print_flags(t_flag *flags);
 int								contains(char c, char *str, int len);
 int								str_num_len(const char *format);
 void                            t_string_mom(t_string *pointer);
+int								v(t_flag flags, va_list list, t_string **result);
 #endif
